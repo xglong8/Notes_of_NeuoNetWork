@@ -1,37 +1,62 @@
-## Welcome to GitHub Pages
+# 卷积神经网络
+>![CNN struction](image/conv_stru.png)   
 
-You can use the [editor on GitHub](https://github.com/xglong8/Notes_of_NeuoNetWork/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+---
+## 1. 基本概念
+### 1.1 卷积
+  - 窄卷积,输出n-m+1
+  - 宽卷积,输出n+m-1
+  - 等宽卷积,输出n   
+>![2D convolution](image/conv.png)   
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### 1.2 互相关
+- 与卷积的区别是卷积核不翻转   
 
-### Markdown
+---
+## 2. 前馈神经网络，误差反向传播
+### 2.1 卷积层
+- 卷积核
+  - 提取局部区域的特征
+  - 在同一层使用不同卷积核可以提取到多个不同特征   
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Feature Map
+  - 经卷积核提取后的特征图
 
-```markdown
-Syntax highlighted code block
+### 2.2 汇聚层/池化层
+- 进行特征选择，减少参数数量
+  - Maximun Pooling 取采样区域内的最大值作为该区域的值
+  - Mean pooling 取采样区域内的平均值作为该区域的值   
+  >![Max pooling](image/max_pooling.png)   
 
-# Header 1
-## Header 2
-### Header 3
+### 2.3 全连接层   
 
-- Bulleted
-- List
+---
+## 3. 结构特性
+  - 局部连接   
+    上一层神经元只与卷积核窗口内神经元相连
+  - 权重共享   
+    卷积核对一层所有神经元权重共享
+  - 汇聚   
 
-1. Numbered
-2. List
+---
+## 4. 参数学习
+### 4.1 卷积核权重
+- 计算损失函数对权重的梯度   
 
-**Bold** and _Italic_ and `Code` text
+### 4.2 卷积核偏置
+- 计算损失函数对偏置的梯度   
 
-[Link](url) and ![Image](src)
-```
+### 4.3 误差项计算
+- 汇聚层/池化层
+  * 最大池化   
+      + 误差项回传时，传到上一层池化区域内最大值对应的神经元，其他神经元误差为0
+  * 平均池化   
+      + 误差项回传时，平均传到上一层池化区域内，所有神经元误差相同
+- 卷积层
+>![Eq 5.32](image/eq5.32.png)   
+>![Eq 5.36](image/eq5.36.png)   
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xglong8/Notes_of_NeuoNetWork/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## 5. 几种典型的CNN
+### 5.1 LeNet-5
+>![LeNet5](image/LeNet-5_1.png)
+>![LeNet5](image/LeNet-5_2.png)
