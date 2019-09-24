@@ -7,15 +7,24 @@
   - 窄卷积,输出n-m+1
   - 宽卷积,输出n+m-1
   - 等宽卷积,输出n   
+
+> 假设卷积层的输入神经元个数为n，卷积核大小为m，步长（stride）为s，输入 神经元两端各填补p个零（zero padding），那么该卷积层的神经元数量为(n−m+2p)/s+1。   
 >![2D convolution](image/conv.png)   
+
+  - 其他卷积形式
+    * 转置卷积（反卷积），从低维度向高维度变的
+    * 微步卷积，向低维度数据中间插入0，然后再卷积，可以提高数据维度
+    * 空洞卷积（膨胀卷积），向卷积核中插入空洞，变相增加卷积核大小，提高了感受野，但是没有增加参数量
 
 ### 1.2 互相关
 - 与卷积的区别是卷积核不翻转   
 
 ---
-## 2. 前馈神经网络，误差反向传播
+## 2. 卷积神经网络-前馈神经网络，误差反向传播   
+
 ### 2.1 卷积层
 - 卷积核
+  - 决定感受野大小
   - 提取局部区域的特征
   - 在同一层使用不同卷积核可以提取到多个不同特征   
 
@@ -57,6 +66,23 @@
 >![Eq 5.36](image/eq5.36.png)   
 
 ## 5. 几种典型的CNN
-### 5.1 LeNet-5
+  - **LeNet-5**
 >![LeNet5](image/LeNet-5_1.png)
->![LeNet5](image/LeNet-5_2.png)
+>![LeNet5](image/LeNet-5_2.png)   
+
+  - **AlexNet**
+    * 首次采用GPU训练
+    * 采用ReLU激活
+    * 使用Dropout 防止过拟合
+    >![AlexNet](image/AlexNet.png)
+    >![AlexNet](image/AlexNet2.png)   
+    注：图5.12中最左边224应该为227   
+  - **Inception网络**
+      * 由Inception 模块和少量池化层堆叠而成
+      * GoogleNet 有9个Iception模块，5个池化层和其他卷积层和全连接层组成
+      * Inception v3把大卷积核换成小卷积核
+      >![Inception](image/Inception.png)   
+  - **ResNet 残差网络**
+      * 把目标函数拆分为恒等函数和残差函数，让神经网络去学习残差函数
+      >![ResNet](image/ResNet-1.png)   
+      >![ResNet](image/ResNet-2.png)   
