@@ -86,3 +86,5 @@
       * 把目标函数拆分为恒等函数和残差函数，让神经网络去学习残差函数
       >![ResNet](image/ResNet-1.png)   
       >![ResNet](image/ResNet-2.png)   
+
+(第五章完结)
